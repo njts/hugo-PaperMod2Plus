@@ -3,12 +3,14 @@
     {{- if site.Copyright }}
     <span>{{ site.Copyright | markdownify }}</span>
     {{- else }}
-    <span>&copy; {{ now.Year }} <a href="{{ "" | absLangURL }}">{{ site.Title }}</a></span>
+    <span>&copy; 2022-{{ now.Year }} <a href="{{ "" | absLangURL }}">{{ site.Title }}</a></span>
     {{- end }}
     <span>
         Powered by
+        <a href="https://meson.network/" rel="noopener noreferrer" target="_blank">Meson</a>,
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
         <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+        <p><a href="{{ .Site.Params.customapis.statusPage }}">Status Page</a></p>
     </span>
 </footer>
 {{- end }}
