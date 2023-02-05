@@ -1,66 +1,7 @@
-
 <div id="visitor-count"><br></br></div>
 <script>
-  (async function() {
-    let visitors = 0;
-    let language = window.location.pathname.split('/')[1] || 'en';
-    let message = "So far, this place has been visited by " +
-      "<span id='visitor-number' class='lcd-number'>" + visitors + "</span> virtual strangers. ";
-    let link = "<a href='./posts/tvap-for-plausible-analytics/'>How'd I get these stats?</a>";
-  
-    if (language === 'tr') {
-      message = "Şimdiye kadar, bu yer " +
-        "<span id='visitor-number' class='lcd-number'>" + visitors + "</span> sanal yabancı tarafından ziyaret edildi. ";
-      link = "<a href='./posts/tvap-for-plausible-analytics/'>Bu istatistikler nasıl alındı?</a>";
-    }
-  
-    let visitorCount = document.getElementById("visitor-count");
-    visitorCount.innerHTML = message + link;
-  
-    fetch("{{ site.Params.customapis.tvapURL }}")
-      .then((response) => response.json())
-      .then((data) => {
-        let newVisitors = data.data.results.visitors.value;
-        updateVisitorCount(newVisitors);
-      });
-  
-    async function updateVisitorCount(newVisitors) {
-      let visitorNumber = document.getElementById("visitor-number");
-      let intervalId = setInterval(() => {
-        if (visitors >= newVisitors) {
-          visitorNumber.innerHTML = newVisitors;
-          clearInterval(intervalId);
-          return;
-        }
-        visitors += Math.floor(Math.random() * 8) + 7;
-        visitorNumber.innerHTML = visitors;
-      }, 15);
-    }
-  })();
-  
-  </script>
-  
-  
-  
-
-
-
+fetch("{{ site.Params.customapis.tvapURL }}").then(a=>a.json()).then(a=>{let s=a.data.results.visitors.value,t=window.location.pathname.split("/")[1]||"en",e="So far, this place has been visited by <span class='lcd-number'>"+s+"</span> virtual strangers. ",i="<a href='./posts/tvap-for-plausible-analytics/'>How'd I get these stats?</a>";"tr"===t&&(e="Şimdiye kadar, bu yer <span class='lcd-number'>"+s+"</span> sanal gezgin tarafından ziyaret edildi. ",i="<a href='./posts/tvap-for-plausible-analytics/'>Bu istatistik nereden geliyor?</a>");document.getElementById("visitor-count").innerHTML=e+i});
+</script>
 <style>
-  #visitor-count {
-    text-align: inline;
-    padding-bottom: 1rem;
-  }
-
-  .lcd-number {
-    font-size: 15px;
-    text-shadow: 0 0 5px #f562ff, 0 0 15px #f562ff, 0 0 25px #f562ff,
-      0 0 10px #f562ff, 0 0 30px #890092, 0 0 10px #890092, 0 0 80px #890092;
-    color: #fccaff;
-    text-shadow: 0 0 5px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500,
-      0 0 10px #ffa500, 0 0 60px #ff0000, 0 0 10px #ff8d00, 0 0 98px #ff0000;
-    color: #fff6a9;
-    font-weight: 500;
-    position: initial;
-  }
+#visitor-count{text-align:inline;padding-bottom:1rem}.lcd-number{font-size:15px;text-shadow:0 0 5px #f562ff,0 0 15px #f562ff,0 0 25px #f562ff,0 0 10px #f562ff,0 0 30px #890092,0 0 10px #890092,0 0 80px #890092;color:#fccaff;text-shadow:0 0 5px #ffa500,0 0 15px #ffa500,0 0 20px #ffa500,0 0 10px #ffa500,0 0 60px #ff0000,0 0 10px #ff8d00,0 0 98px red;color:#fff6a9;position:initial}
 </style>
-
