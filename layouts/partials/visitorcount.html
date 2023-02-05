@@ -1,14 +1,20 @@
 <div id="visitor-count"><br></br></div>
 <script>
   window.onload = function () {
+    const lang = document.documentElement.lang;
     fetch("{{ site.Params.customapis.tvapURL }}")
       .then((response) => response.json())
       .then((data) => {
-        document.getElementById("visitor-count").innerHTML =
-          "So far, this place  has been visited by " +
-          "<span class='lcd-number'>" +
-          data.data.results.visitors.value +
-          "</span> virtual strangers. <a href='./posts/tvap-for-plausible-analytics/'>How'd I get these stats?</a>";
+        let visitorCountText = "So far, this place has been visited by ";
+        let virtualStrangersText = " virtual strangers. ";
+        let statsText = "<a href='./posts/tvap-for-plausible-analytics/'>How'd I get these stats?</a>";
+        if(lang === "tr") {
+          visitorCountText = "Şimdiye kadar, bu yer ";
+          virtualStrangersText = " sanal gezgin tarafından ziyaret edildi. ";
+          statsText = "<a href='./posts/tvap-for-plausible-analytics/'>Bu istatistikler nereden geliyor?</a>";
+        }
+        visitorCountText += "<span class='lcd-number'>" + data.data.results.visitors.value + "</span>" + virtualStrangersText + statsText;
+        document.getElementById("visitor-count").innerHTML = visitorCountText;
       });
   };
 </script>
